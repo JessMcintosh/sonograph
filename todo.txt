@@ -1,0 +1,23 @@
+****
+- Increase to 100Mhz sampling rate
+  16bit makes things better?
+
+- Pulse with all elements
+
+- 2D probe: how is the resolution?
+  Move the slice around
+  CMS for locating the tendons
+  TFM for getting the speckle patterns
+
+****
+- Sniffing the protocol
+  Read Matrix with SonoGraph
+  
+****
+- Hand immersed in water
+  
+- Learn from a Sonographer how to identify the tendons
+
+**** 
+- Test performance of the current code
+  optimize
