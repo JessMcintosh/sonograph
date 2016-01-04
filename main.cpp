@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
 			QCoreApplication::translate("main", "speed")},
 		// Seperation between elements
 		{{"e", "e_sep"},
-			QCoreApplication::translate("main", "Seperation between elements"),
+			QCoreApplication::translate("main", "Seperation between elements."),
 			QCoreApplication::translate("main", "e_sep")},
 		// Sampling frequency
 		{{"f", "frequency"},
@@ -42,7 +42,7 @@ int main(int argc, char *argv[])
 			QCoreApplication::translate("main", "Number of elements used."),
 			QCoreApplication::translate("main", "elements")},
 		{"file",
-			QCoreApplication::translate("main", "File"),
+			QCoreApplication::translate("main", "File."),
 			QCoreApplication::translate("main", "file")},
 	});
 	parser.process(app);
