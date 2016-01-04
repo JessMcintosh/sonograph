@@ -28,5 +28,5 @@
 *.app
 
 # binary directory
-bin/
-Makefile
+**/bin/
+**/Makefile
