@@ -30,8 +30,8 @@ MainWidget::MainWidget(float s, float f, int l, int n, float e, std::string file
 	sampleSpeed(s), // m/S
 	samplingFrequency(f),
 	sampleSize(l),
-	//centreFrequency(5000000.0),
-	centreFrequency(10000000.0),
+	centreFrequency(5000000.0),
+	//centreFrequency(10000000.0),
 	numElements(n),
 	filename(file)
 	//sampleSpeed(6300.0f); // m/S
@@ -230,13 +230,15 @@ void MainWidget::createGaussian()
 	// f(x; sig, c) = e ^ ( -(x-c)^2 / 2*sig^2 )
 	
 	// Calculate sigma and c
-	float sigma = gauss_sigma;
-	float c = gauss_c;
+	//float sigma = gauss_sigma;
+	//float c = gauss_c;
 
-	for (int x = 0; x < sampleSize; x++) {
-		gaussFilter[x] = exp( ( (-((x-c)*(x-c))) / (2*sigma*sigma)) );
-		//std::cout << "filter [" << x << "] = " << gaussFilter[x] << std::endl;
-	}
+	//for (int x = 0; x < sampleSize; x++) {
+	//	gaussFilter[x] = exp( ( (-((x-c)*(x-c))) / (2*sigma*sigma)) );
+	//	//std::cout << "filter [" << x << "] = " << gaussFilter[x] << std::endl;
+	//}
+
+	//return;
 	
 
 
@@ -431,13 +433,13 @@ void MainWidget::paintGL()
 
 void MainWidget::setOverExposure(int val)
 {
-	overexposure = (float) val / 10.0;
+	overexposure = (float) val / 100.0;
 	updateGL();
 }
 
 void MainWidget::setLogFactor(int val)
 {
-	logfactor = (float) val / 10.0;
+	logfactor = (float) val / 100.0;
 	updateGL();
 }
 

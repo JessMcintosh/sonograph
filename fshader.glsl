@@ -38,7 +38,8 @@ void main()
 		return;
 	}
 
-	float leftmost = -( float(numElements)/2.0 - 0.5);
+	//float leftmost = -( float(numElements)/2.0 - 0.5);
+	float leftmost = ( float(numElements)/2.0 - 0.5);
 
 	// Position of the point in the plane in the real world 
 	// (vec4 contains homogeneous 1.0 in fourth element)
@@ -65,7 +66,7 @@ void main()
 	for(int i = 0; i < numElements; i++){
 
 		// Calculate the position of the i_th element, assume coplanar  (x axis)
-		float xpos = (leftmost+float(i))*e_sep;
+		float xpos = (leftmost-float(i))*e_sep;
 		
 		vec3 e_pos = vec3(xpos, 0.0, 0.0);
 		distance = length(e_pos - pos);

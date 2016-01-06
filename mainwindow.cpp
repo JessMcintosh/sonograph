@@ -41,8 +41,8 @@ MainWindow::MainWindow(float s, float f, int l, int n, float e, std::string file
     mainLayout->addWidget(w);
     setLayout(mainLayout);
 
-    expSlider->setValue(5);
-    logFactorSlider->setValue(5);
+    expSlider->setValue(50);
+    logFactorSlider->setValue(50);
 
     connect(expSlider, SIGNAL(valueChanged(int)), glWidget, SLOT(setOverExposure(int)));
     connect(logFactorSlider, SIGNAL(valueChanged(int)), glWidget, SLOT(setLogFactor(int)));
@@ -54,10 +54,10 @@ MainWindow::MainWindow(float s, float f, int l, int n, float e, std::string file
 QSlider *MainWindow::createSlider()
 {
     QSlider *slider = new QSlider(Qt::Vertical);
-    slider->setRange(0, 100);
+    slider->setRange(0, 200);
     slider->setSingleStep(1);
-    slider->setPageStep(100);
-    slider->setTickInterval(100);
+    slider->setPageStep(200);
+    slider->setTickInterval(200);
     slider->setTickPosition(QSlider::TicksRight);
     return slider;
 }
