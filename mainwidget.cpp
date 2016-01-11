@@ -12,7 +12,7 @@
 #include <iterator>
 
 
-MainWidget::MainWidget(float s, float f, int l, int n, float e, std::string file, QWidget* parent) :
+MainWidget::MainWidget(float s, float f, int l, int n, float e, std::string file, bool tfm, QWidget* parent) :
     QGLWidget(parent),
     angularSpeed(0),
 	e_sep(e),
@@ -33,8 +33,8 @@ MainWidget::MainWidget(float s, float f, int l, int n, float e, std::string file
 	centreFrequency(5000000.0),
 	//centreFrequency(10000000.0),
 	numElements(n),
-	filename(file)
-	//sampleSpeed(6300.0f); // m/S
+	filename(file),
+	tfm(tfm)
 {
 }
 
@@ -240,8 +240,6 @@ void MainWidget::createGaussian()
 
 	//return;
 	
-
-
 	// Really shit and needs cleaning up
 
 	float db_down = 40.0;

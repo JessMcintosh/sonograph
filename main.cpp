@@ -54,6 +54,7 @@ int main(int argc, char *argv[])
 	int l = 1000;
 	int n = 64;
 	float e = 0.00063;
+	bool tfm = false;
 	std::string file = "hole_data.csv";
 
 	if(parser.isSet("speed")) s = parser.value("speed").toFloat();
@@ -62,10 +63,11 @@ int main(int argc, char *argv[])
 	if(parser.isSet("elements")) n = parser.value("elements").toInt();
 	if(parser.isSet("e_sep")) e = parser.value("e_sep").toFloat();
 	if(parser.isSet("file")) file = parser.value("file").toStdString();
-
+	tfm = parser.isSet("tfm");
 	qDebug() << s << QString(file.c_str());
+	qDebug() << QString("TFM: ") << tfm ;
 
-	MainWindow mainWindow(s, f, l, n, e, file);
+	MainWindow mainWindow(s, f, l, n, e, file, tfm);
 
 	mainWindow.show();
 	//MainWidget widget;

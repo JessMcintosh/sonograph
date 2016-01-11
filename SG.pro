@@ -18,12 +18,14 @@ qtHaveModule(opengl) {
     QT += opengl
 
     SOURCES += mainwidget.cpp \
+	   mainwidget_tfm.cpp \
        geometryengine.cpp \
 	   mainwindow.cpp \
 	   #window.cpp
 
     HEADERS += \
         mainwidget.h \
+		mainwidget_tfm.h \
         geometryengine.h \
 		mainwindow.h \
 		#window.h

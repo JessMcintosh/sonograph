@@ -1,4 +1,5 @@
 #include "mainwidget.h"
+#include "mainwidget_tfm.h"
 #include "mainwindow.h"
 #include <QMenuBar>
 #include <QMenu>
@@ -11,8 +12,9 @@
 #include <QDesktopWidget>
 #include <QApplication>
 #include <QMessageBox>
+#include <QDebug>
 
-MainWindow::MainWindow(float s, float f, int l, int n, float e, std::string file, QWidget *parent)
+MainWindow::MainWindow(float s, float f, int l, int n, float e, std::string file, bool tfm, QWidget *parent)
 {
     //QMenuBar *menuBar = new QMenuBar;
     //QMenu *menuWindow = menuBar->addMenu(tr("&Window"));
@@ -23,17 +25,28 @@ MainWindow::MainWindow(float s, float f, int l, int n, float e, std::string file
     //setMenuBar(menuBar);
 
     ///onAddNew();
-
-	glWidget = new MainWidget(s, f, l, n, e, file);
-	//glWidget = new MainWidget;
-	glWidget->setMinimumSize(400,600);
-
+	
     expSlider = createSlider();
     logFactorSlider = createSlider();
 
     QVBoxLayout *mainLayout = new QVBoxLayout;
     QHBoxLayout *container = new QHBoxLayout;
-    container->addWidget(glWidget);
+
+	if(tfm){
+		glWidgetTFM = new MainWidgetTFM(s, f, l, n, e, file, tfm);
+		glWidgetTFM->setMinimumSize(400,600);
+		container->addWidget(glWidgetTFM);
+		connect(expSlider, SIGNAL(valueChanged(int)), glWidgetTFM, SLOT(setOverExposure(int)));
+		connect(logFactorSlider, SIGNAL(valueChanged(int)), glWidgetTFM, SLOT(setLogFactor(int)));
+	}
+	else{
+		glWidget = new MainWidget(s, f, l, n, e, file, tfm);
+		glWidget->setMinimumSize(400,600);
+		container->addWidget(glWidget);
+		connect(expSlider, SIGNAL(valueChanged(int)), glWidget, SLOT(setOverExposure(int)));
+		connect(logFactorSlider, SIGNAL(valueChanged(int)), glWidget, SLOT(setLogFactor(int)));
+	}
+
     container->addWidget(expSlider);
     container->addWidget(logFactorSlider);
     QWidget *w = new QWidget;
@@ -44,8 +57,6 @@ MainWindow::MainWindow(float s, float f, int l, int n, float e, std::string file
     expSlider->setValue(50);
     logFactorSlider->setValue(50);
 
-    connect(expSlider, SIGNAL(valueChanged(int)), glWidget, SLOT(setOverExposure(int)));
-    connect(logFactorSlider, SIGNAL(valueChanged(int)), glWidget, SLOT(setLogFactor(int)));
 
     setWindowTitle(tr("Sonograph"));
 }

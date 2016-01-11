@@ -1,7 +1,8 @@
-#ifndef MAINWIDGET_H
-#define MAINWIDGET_H
+#ifndef MAINWIDGET_TFM_H
+#define MAINWIDGET_TFM_H
 
 #include "geometryengine.h"
+#include "mainwidget.h"
 
 #include <QGLWidget>
 #include <QGLFunctions>
@@ -19,13 +20,22 @@
 
 class GeometryEngine;
 
-class MainWidget : public QGLWidget, protected QGLFunctions
+class MainWidgetTFM : public MainWidget
+{
+	using MainWidget::MainWidget;
+
+public:
+	//using MainWidget::initArrays;
+	void initArrays();
+};
+/*
+class MainWidgetTFM : public QGLWidget, protected QGLFunctions
 {
     Q_OBJECT
 
 public:
-    explicit MainWidget(QWidget *parent = 0);
-	explicit MainWidget(float s, float f, int l, int n, float e, std::string file, bool tfm, QWidget *parent = 0);
+    explicit MainWidgetTFM(QWidget *parent = 0);
+	explicit MainWidgetTFM(float s, float f, int l, int n, float e, std::string file, bool tfm, QWidget *parent = 0);
 	void increaseSigma() { gauss_sigma+=1.0; qDebug() << "New Sigma: " << gauss_sigma; initTextures(); updateGL(); }
 	void decreaseSigma() { gauss_sigma-=1.0; qDebug() << "New Sigma: " << gauss_sigma; initTextures(); updateGL(); }
 	void increaseC() { gauss_c+=1.0; qDebug() << "New c: " << gauss_c; initTextures(); updateGL(); }
@@ -59,6 +69,7 @@ protected:
     void timerEvent(QTimerEvent *e);
 	void wheelEvent(QWheelEvent *event);
 
+	void initArrays();
     void initializeGL();
     void resizeGL(int w, int h);
     void paintGL();
@@ -71,6 +82,7 @@ protected:
 
 	size_t index( int x, int y ) const { return x + sampleSize * y; }
 
+private:
     QBasicTimer timer;
     QGLShaderProgram program;
     GeometryEngine geometries;
@@ -102,9 +114,8 @@ protected:
 	fftw_complex *in, *out;
 	double *magnitude;
 	double *gaussFilter;
-private:
-	void initArrays();
 
 };
+*/
 
-#endif // MAINWIDGET_H
+#endif // MAINWIDGET_TFM_H
