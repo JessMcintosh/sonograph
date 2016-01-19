@@ -26,6 +26,8 @@ private:
 	MainWidget *glWidget;
 	MainWidgetTFM *glWidgetTFM;
     QSlider *createSlider();
+	void *widgetPointer;
+	bool tfm;
 protected:
 	void keyPressEvent(QKeyEvent *event) Q_DECL_OVERRIDE;
 

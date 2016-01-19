@@ -15,6 +15,7 @@
 #include <QDebug>
 
 MainWindow::MainWindow(float s, float f, int l, int n, float e, std::string file, bool tfm, QWidget *parent)
+	: tfm(tfm)
 {
     //QMenuBar *menuBar = new QMenuBar;
     //QMenu *menuWindow = menuBar->addMenu(tr("&Window"));
@@ -38,6 +39,7 @@ MainWindow::MainWindow(float s, float f, int l, int n, float e, std::string file
 		container->addWidget(glWidgetTFM);
 		connect(expSlider, SIGNAL(valueChanged(int)), glWidgetTFM, SLOT(setOverExposure(int)));
 		connect(logFactorSlider, SIGNAL(valueChanged(int)), glWidgetTFM, SLOT(setLogFactor(int)));
+		widgetPointer = glWidgetTFM;
 	}
 	else{
 		glWidget = new MainWidget(s, f, l, n, e, file, tfm);
@@ -45,6 +47,7 @@ MainWindow::MainWindow(float s, float f, int l, int n, float e, std::string file
 		container->addWidget(glWidget);
 		connect(expSlider, SIGNAL(valueChanged(int)), glWidget, SLOT(setOverExposure(int)));
 		connect(logFactorSlider, SIGNAL(valueChanged(int)), glWidget, SLOT(setLogFactor(int)));
+		widgetPointer = glWidget;
 	}
 
     container->addWidget(expSlider);
@@ -75,27 +78,57 @@ QSlider *MainWindow::createSlider()
 
 void MainWindow::keyPressEvent(QKeyEvent *e)
 {
-	switch(e->key()){
-		case(Qt::Key_Escape):
-		case(Qt::Key_Q):
-			close();
-			break;
-		case(Qt::Key_J): 		glWidget->increaseC(); break;
-		case(Qt::Key_K): 		glWidget->decreaseC(); break;
-		case(Qt::Key_G): 		glWidget->increaseSigma(); break;
-		case(Qt::Key_H): 		glWidget->decreaseSigma(); break;
-		case(Qt::Key_E): 		glWidget->increaseF(); break;
-		case(Qt::Key_R): 		glWidget->decreaseF(); break;
-		case(Qt::Key_Space): 	glWidget->toggleAScan(); break;
-		case(Qt::Key_W): 		glWidget->viewUp(); break;
-		case(Qt::Key_A): 		glWidget->viewLeft(); break;
-		case(Qt::Key_S): 		glWidget->viewDown(); break;
-		case(Qt::Key_D): 		glWidget->viewRight(); break;
-		case(Qt::Key_Equal): 	glWidget->scaleUp(); break;
-		case(Qt::Key_Minus): 	glWidget->scaleDown(); break;
-		default:
-			QWidget::keyPressEvent(e);
-			break;
+	//                 |
+	// Clean this mess v
+	if(tfm){
+		switch(e->key()){
+			case(Qt::Key_Escape):
+			case(Qt::Key_Q):
+				close();
+				break;
+			case(Qt::Key_J): 		glWidgetTFM->increaseC(); break;
+			case(Qt::Key_K): 		glWidgetTFM->decreaseC(); break;
+			case(Qt::Key_G): 		glWidgetTFM->increaseSigma(); break;
+			case(Qt::Key_H): 		glWidgetTFM->decreaseSigma(); break;
+			case(Qt::Key_E): 		glWidgetTFM->increaseF(); break;
+			case(Qt::Key_R): 		glWidgetTFM->decreaseF(); break;
+			case(Qt::Key_Space):	glWidgetTFM->toggleAScan(); break;
+			case(Qt::Key_W): 		glWidgetTFM->viewUp(); break;
+			case(Qt::Key_A): 		glWidgetTFM->viewLeft(); break;
+			case(Qt::Key_S): 		glWidgetTFM->viewDown(); break;
+			case(Qt::Key_D): 		glWidgetTFM->viewRight(); break;
+			case(Qt::Key_Equal):	glWidgetTFM->scaleUp(); break;
+			case(Qt::Key_Minus):	glWidgetTFM->scaleDown(); break;
+			case(Qt::Key_M):		glWidgetTFM->layerUp(); break;
+			case(Qt::Key_N):		glWidgetTFM->layerDown(); break;
+			default:
+				QWidget::keyPressEvent(e);
+				break;
+		}
+	}
+	else{
+		switch(e->key()){
+			case(Qt::Key_Escape):
+			case(Qt::Key_Q):
+				close();
+				break;
+			case(Qt::Key_J): 		glWidget->increaseC(); break;
+			case(Qt::Key_K): 		glWidget->decreaseC(); break;
+			case(Qt::Key_G): 		glWidget->increaseSigma(); break;
+			case(Qt::Key_H): 		glWidget->decreaseSigma(); break;
+			case(Qt::Key_E): 		glWidget->increaseF(); break;
+			case(Qt::Key_R): 		glWidget->decreaseF(); break;
+			case(Qt::Key_Space):	glWidget->toggleAScan(); break;
+			case(Qt::Key_W): 		glWidget->viewUp(); break;
+			case(Qt::Key_A): 		glWidget->viewLeft(); break;
+			case(Qt::Key_S): 		glWidget->viewDown(); break;
+			case(Qt::Key_D): 		glWidget->viewRight(); break;
+			case(Qt::Key_Equal):	glWidget->scaleUp(); break;
+			case(Qt::Key_Minus):	glWidget->scaleDown(); break;
+			default:
+				QWidget::keyPressEvent(e);
+				break;
+		}
 	}
 }
 
