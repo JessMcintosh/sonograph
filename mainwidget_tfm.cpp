@@ -349,9 +349,11 @@ void MainWidgetTFM::initTextures()
 	std::cout << "h : " << texture->height() << std::endl;
 	std::cout << "d : " << texture->depth() << std::endl;
 
-    texture->setMinificationFilter(QOpenGLTexture::Linear);
+    //texture->setMinificationFilter(QOpenGLTexture::Linear);
+    texture->setMinificationFilter(QOpenGLTexture::Nearest);
     //texture->setMagnificationFilter(QOpenGLTexture::Linear);
-    texture->setMagnificationFilter(QOpenGLTexture::Linear);
+    //texture->setMagnificationFilter(QOpenGLTexture::Linear);
+    texture->setMagnificationFilter(QOpenGLTexture::Nearest);
     texture->setWrapMode(QOpenGLTexture::Repeat);
 
 	texture->bind();	
@@ -378,6 +380,7 @@ void MainWidgetTFM::resizeGL(int w, int h)
 
 void MainWidgetTFM::paintGL()
 {
+	qDebug() << "Rerendering..";
     // Clear color and depth buffer
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
