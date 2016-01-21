@@ -1,11 +1,11 @@
 #include <QApplication>
 
-#include "networkcontroller.h"
+#include "networkgui.h"
 
 int main(int argc, char *argv[])
 {
 	QApplication app(argc, argv);
-	NetworkController nc;
+	NetworkGUI nc;
 	nc.show();
 	return app.exec();
 }

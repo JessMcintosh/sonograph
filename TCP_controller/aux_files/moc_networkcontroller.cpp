@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_NetworkController_t {
-    QByteArrayData data[4];
-    char stringdata0[52];
+    QByteArrayData data[5];
+    char stringdata0[57];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -32,11 +32,12 @@ static const qt_meta_stringdata_NetworkController_t qt_meta_stringdata_NetworkCo
 QT_MOC_LITERAL(0, 0, 17), // "NetworkController"
 QT_MOC_LITERAL(1, 18, 23), // "processPendingDatagrams"
 QT_MOC_LITERAL(2, 42, 0), // ""
-QT_MOC_LITERAL(3, 43, 8) // "sendData"
+QT_MOC_LITERAL(3, 43, 8), // "sendData"
+QT_MOC_LITERAL(4, 52, 4) // "data"
 
     },
     "NetworkController\0processPendingDatagrams\0"
-    "\0sendData"
+    "\0sendData\0data"
 };
 #undef QT_MOC_LITERAL
 
@@ -54,12 +55,12 @@ static const uint qt_meta_data_NetworkController[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   24,    2, 0x08 /* Private */,
-       3,    0,   25,    2, 0x08 /* Private */,
+       1,    0,   24,    2, 0x0a /* Public */,
+       3,    1,   25,    2, 0x0a /* Public */,
 
  // slots: parameters
     QMetaType::Void,
-    QMetaType::Void,
+    QMetaType::Void, QMetaType::QByteArray,    4,
 
        0        // eod
 };
@@ -71,15 +72,14 @@ void NetworkController::qt_static_metacall(QObject *_o, QMetaObject::Call _c, in
         Q_UNUSED(_t)
         switch (_id) {
         case 0: _t->processPendingDatagrams(); break;
-        case 1: _t->sendData(); break;
+        case 1: _t->sendData((*reinterpret_cast< QByteArray(*)>(_a[1]))); break;
         default: ;
         }
     }
-    Q_UNUSED(_a);
 }
 
 const QMetaObject NetworkController::staticMetaObject = {
-    { &QDialog::staticMetaObject, qt_meta_stringdata_NetworkController.data,
+    { &QObject::staticMetaObject, qt_meta_stringdata_NetworkController.data,
       qt_meta_data_NetworkController,  qt_static_metacall, Q_NULLPTR, Q_NULLPTR}
 };
 
@@ -94,12 +94,12 @@ void *NetworkController::qt_metacast(const char *_clname)
     if (!_clname) return Q_NULLPTR;
     if (!strcmp(_clname, qt_meta_stringdata_NetworkController.stringdata0))
         return static_cast<void*>(const_cast< NetworkController*>(this));
-    return QDialog::qt_metacast(_clname);
+    return QObject::qt_metacast(_clname);
 }
 
 int NetworkController::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
-    _id = QDialog::qt_metacall(_c, _id, _a);
+    _id = QObject::qt_metacall(_c, _id, _a);
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {

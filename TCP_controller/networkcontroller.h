@@ -1,28 +1,22 @@
 #ifndef RECEIVER_H
 #define RECEIVER_H
 
-#include <QDialog>
 #include <QHostAddress>
 
-class QLabel;
-class QPushButton;
 class QTcpSocket;
 
-class NetworkController : public QDialog
+class NetworkController : public QObject
 {
     Q_OBJECT
 
 public:
-    NetworkController(QWidget *parent = 0);
+    NetworkController();
 
-private slots:
+public slots:
     void processPendingDatagrams();
-    void sendData();
+    void sendData(QByteArray data);
 
 private:
-    QLabel *statusLabel;
-    QPushButton *quitButton;
-    QPushButton *sendButton;
     QTcpSocket *tcpSocket;
     QHostAddress groupAddress;
 };

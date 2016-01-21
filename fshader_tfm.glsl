@@ -31,7 +31,8 @@ void main()
 		// Set fragment color from texture
 		//gl_FragColor = texture2D(texture, tPos);
 		//vec4 tex = texture3D(texture, vec3(tPos,1.0));
-		//vec4 tex = texture(textureData, vec3(tPos,layer));
+		vec4 tex = texture(textureData, vec3(tPos,layer));
+
 
 		vec4 sum_col = vec4(0,0,0,0);
 
@@ -45,7 +46,8 @@ void main()
 		col_abs = sqrt(col_r*col_r + col_i*col_i);
 		col_abs = overexposure * log(logfactor * col_abs + 1.0);
 		gl_FragColor = vec4(col_abs, col_abs, col_abs, 1.0);
-		//gl_FragColor = vec4(1.0,0.0,1.0,1.0);
+		gl_FragColor = tex;
+				//gl_FragColor = vec4(1.0,0.0,1.0,1.0);
 		return;
 	}
 
@@ -96,7 +98,8 @@ void main()
 				element_contr_count += 1.0;
 				// depending on how the textures laid out...
 				//vec4 tex = texture2D(texture, tPos);
-				vec4 tex = texture(textureData, vec3(index, 1.0-(float(i)/float(numElements)), float(j)/float(numElements)));
+				vec4 tex = texture(textureData, vec3(index, 1.0-(float(i)/float(numElements)), 1.0 - float(j)/float(numElements)));
+				//vec4 tex = texture(textureData, vec3(index, 1.0-(float(i)/float(numElements)), float(j)/float(numElements)));
 				col_r += tex[0];
 				col_i += tex[1];
 			}

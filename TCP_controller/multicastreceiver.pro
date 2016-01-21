@@ -1,8 +1,10 @@
 QT += network widgets
 QT += core
 
-HEADERS       = networkcontroller.h
+HEADERS       = networkcontroller.h \
+				networkgui.h
 SOURCES       = networkcontroller.cpp \
+				networkgui.cpp \
                 main.cpp
 
 # install
