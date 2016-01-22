@@ -17,11 +17,15 @@ public:
     NetworkGUI(QWidget *parent = 0);
 private slots:
     void sendSomething();
+    void sendStart();
+    void sendCal();
 
 private:
     QLabel *statusLabel;
     QPushButton *quitButton;
     QPushButton *sendButton;
+    QPushButton *startButton;
+    QPushButton *calButton;
 	NetworkController *controller;
 };
 

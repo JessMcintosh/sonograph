@@ -10,7 +10,8 @@ NetworkController::NetworkController()
     groupAddress = QHostAddress("localhost");
 
     tcpSocket = new QTcpSocket(this);
-	tcpSocket->connectToHost("127.0.0.1", 45454);
+	//tcpSocket->connectToHost("127.0.0.1", 45454);
+	tcpSocket->connectToHost("10.1.1.2", 1067);
 
 	QObject::connect(tcpSocket, SIGNAL(readyRead()),
             this, SLOT(processPendingDatagrams()));
