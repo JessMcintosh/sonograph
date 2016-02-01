@@ -3,9 +3,9 @@ QT += network widgets
 QT += core
 
 HEADERS       = networkcontroller.h \
-				networkgui.h
+				fakemachine.h
 SOURCES       = networkcontroller.cpp \
-				networkgui.cpp \
+				fakemachine.cpp \
                 main.cpp
 
 # install

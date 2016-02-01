@@ -1,4 +1,6 @@
-QT       += core gui widgets 
+QMAKE_MAC_SDK = macosx10.11
+
+QT       += core gui widgets network
 CONFIG += debug c++11
 
 TARGET = program.exe
@@ -21,14 +23,15 @@ qtHaveModule(opengl) {
 	   mainwidget_tfm.cpp \
        geometryengine.cpp \
 	   mainwindow.cpp \
-	   #window.cpp
+	   TCP_controller/networkcontroller.cpp
+
 
     HEADERS += \
         mainwidget.h \
 		mainwidget_tfm.h \
         geometryengine.h \
 		mainwindow.h \
-		#window.h
+	    TCP_controller/networkcontroller.h
 
     RESOURCES += \
         shaders.qrc \

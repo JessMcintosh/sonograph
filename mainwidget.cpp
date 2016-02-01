@@ -30,11 +30,13 @@ MainWidget::MainWidget(float s, float f, int l, int n, float e, std::string file
 	sampleSpeed(s), // m/S
 	samplingFrequency(f),
 	sampleSize(l),
-	centreFrequency(5000000.0),
+	//centreFrequency(5000000.0),
+	centreFrequency(15000000.0),
 	//centreFrequency(10000000.0),
 	numElements(n),
 	filename(file),
-	tfm(tfm)
+	tfm(tfm),
+	e_sepMode(false)
 {
 }
 
@@ -117,6 +119,15 @@ void MainWidget::initShaders()
 void MainWidget::filterFFT(){
 
 	for (int element = 0; element < numElements; element++) {
+
+		//for (int i = 0; i < sampleSize; i++) {
+		//	//m_filtered_data_ri[element][i][0] = (in[i][0]);//(float)
+		//	//m_filtered_data_ri[element][i][1] = (in[i][1]);//(float)
+		//	m_filtered_data_ri[index(i,element)*2] 		= (m_data[index(i,element)]);//(float)
+		//	m_filtered_data_ri[index(i,element)*2+1]	= 0;//(float)
+		//}
+		//continue;
+
 
 		// copy the array to fftw_complex structure, could be a faster way e.g. memcpy
 		for (int i = 0; i < sampleSize; i++) {
@@ -372,6 +383,13 @@ void MainWidget::initTextures()
 	texture->bind();	
 }
 
+void MainWidget::setNewTextureData(double *newData){
+	memcpy(m_data, newData, numElements * sampleSize * sizeof(double));
+	filterFFT();
+	texture->setData(QOpenGLTexture::RG, QOpenGLTexture::Float32, m_filtered_data_ri);
+	updateGL();
+}
+
 void MainWidget::resizeGL(int w, int h)
 {
     // Set OpenGL viewport to cover whole widget
@@ -393,6 +411,7 @@ void MainWidget::resizeGL(int w, int h)
 
 void MainWidget::paintGL()
 {
+	//qDebug() << "Rerendering";
     // Clear color and depth buffer
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -446,9 +465,13 @@ void MainWidget::wheelEvent(QWheelEvent *event)
     int numDegrees = event->delta() / 8;
     int numSteps = numDegrees / 15;
 
-	e_sep += (float)numSteps*0.00001; 
-
-	std::cout << "e_sep: " << e_sep << std::endl;
+	if(e_sepMode){
+		e_sep += (float)numSteps*0.00001; 
+		std::cout << "e_sep: " << e_sep << std::endl;
+	}
+	else{
+		viewScale -= (float)numSteps*0.1;
+	}
 	update();
 
     event->accept();
@@ -458,6 +481,20 @@ void MainWidget::mousePressEvent(QMouseEvent *e)
 {
     // Save mouse press position
     mousePressPosition = QVector2D(e->localPos());
+}
+
+void MainWidget::mouseMoveEvent(QMouseEvent *e)
+{
+
+    // Mouse release position - mouse press position
+    QVector2D diff = QVector2D(e->localPos()) - mousePressPosition;
+
+	mousePressPosition = QVector2D(e->localPos());
+
+	x_translation += diff.x() / ( 100.0* viewScale );
+	y_translation -= diff.y() / (viewScale *100.0);
+	updateGL();
+
 }
 
 void MainWidget::mouseReleaseEvent(QMouseEvent *e)

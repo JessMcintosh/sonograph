@@ -40,8 +40,11 @@ public:
 	void scaleUp(){  viewScale += 0.1; updateGL(); }
 	void scaleDown(){  viewScale -= 0.1; updateGL(); }
 
+	void setNewTextureData(double *newData);
+
     ~MainWidget();
 
+	bool e_sepMode;
 	float samplingFrequency;
 	int sampleSize;
 	float sampleSpeed;
@@ -56,6 +59,7 @@ public slots:
 protected:
     void mousePressEvent(QMouseEvent *e);
     void mouseReleaseEvent(QMouseEvent *e);
+	void mouseMoveEvent(QMouseEvent *e);
     void timerEvent(QTimerEvent *e);
 	void wheelEvent(QWheelEvent *event);
 
